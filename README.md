@@ -19,10 +19,10 @@ enable-swift-package-manager, omit-legacy-version-file, enable-lldb-debugging, e
 ```
 Gemini 3.1 Pro explanation of the problem:
 The Root Cause
-When you open "TopPage" Page on top of "NestedNavigatorWrapper" Page, the "TopPage" is correctly marked as the active foreground route (isCurrent == true) in the root navigator.
-However, "NestedNavigatorWrapper" Page is also the top route of its own nested navigator.
+When you open "TopPage" Page on top of "NestedPage2" Page, the "TopPage" is correctly marked as the active foreground route (isCurrent == true) in the root navigator.
+However, "NestedPage2" Page is also the top route of its own nested navigator.
 In Flutter's eyes, its isCurrent property is also true (relative to its own nested stack).
 Standard Flutter MaterialPageRoute automatically registers a gesture listener for predictive back.
 When you start swiping, the Flutter engine broadcasts the gesture to all active listeners.
-Since both the "Top Page" and the nested "NestedNavigatorWrapper" Page have isCurrent == true, they both receive the gesture, animate, and pop simultaneously!
+Since both the "Top Page" and the nested "NestedPage2" Page have isCurrent == true, they both receive the gesture, animate, and pop simultaneously!
 ```
