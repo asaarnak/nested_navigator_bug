@@ -1,4 +1,6 @@
-You can switch between AppPage(with temporary fix) and MaterialPage to tested on Android.
+Predictive back swiping pops both nested and root navigator routes.
+You can switch between AppPage(with temporary fix) and MaterialPage.
+Tested on Android 16 with predictive back swipes.
 
 My screen recording of the bug popping 2 pages with one swipe:
 [Screen_Recording_20260423_005945.mp4](Screen_Recording_20260423_005945.mp4)
