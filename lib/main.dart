@@ -20,24 +20,24 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Navigator(
         pages: [
-          // MaterialPage(
-          AppPage(
+          MaterialPage(
+            // AppPage(
             name: 'RootScreen',
             child: RootScreen(
               onOpenNested: () => setState(() => _showNestedNavigator = true),
             ),
           ),
           if (_showNestedNavigator)
-            // MaterialPage(
-            AppPage(
+            MaterialPage(
+              // AppPage(
               name: 'NestedNavigatorWrapper',
               child: NestedNavigatorWrapper(
                 onOpenTopPage: () => setState(() => _showTopPage = true),
               ),
             ),
           if (_showTopPage)
-            // MaterialPage(
-            AppPage(
+            MaterialPage(
+              // AppPage(
               name: 'TopPage',
               child: TopPage(
                 onClose: () => setState(() => _showTopPage = false),
@@ -86,16 +86,16 @@ class _NestedNavigatorWrapperState extends State<NestedNavigatorWrapper> {
   @override
   Widget build(BuildContext context) {
     final pages = [
-      // MaterialPage(
-      AppPage(
+      MaterialPage(
+      // AppPage(
         name: 'NestedPage1',
         child: NestedPage1(
           onOpenPage2: () => setState(() => _showPage2 = true),
         ),
       ),
       if (_showPage2)
-        // MaterialPage(
-        AppPage(
+        MaterialPage(
+        // AppPage(
           name: 'NestedPage2',
           child: NestedPage2(onOpenTopPage: widget.onOpenTopPage),
         ),
