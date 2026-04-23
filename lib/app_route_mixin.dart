@@ -9,21 +9,27 @@ mixin AppRouteMixin<T> on ModalRoute<T> {
     // 1. If we aren't top of our local stack, we aren't current.
     if (!isLocallyCurrent) return false;
 
-    // 2. If our navigator is inside another route, that parent route
+    // 2. If our navigator is inside other routes, ALL ancestor routes
     // must also be current (locally).
     final parentRoute = ModalRoute.of(navigator!.context);
-    if (parentRoute != null) {
-      final bool parentIsLocallyCurrent = parentRoute is AppRouteMixin
-          ? (parentRoute as AppRouteMixin).isLocallyCurrent
-          : parentRoute.isCurrent;
-      if (!parentIsLocallyCurrent) return false;
+    Route<dynamic>? currentAncestor = parentRoute;
+    while (currentAncestor != null) {
+      final bool ancestorIsLocallyCurrent = currentAncestor is AppRouteMixin
+          ? currentAncestor.isLocallyCurrent
+          : currentAncestor.isCurrent;
+      if (!ancestorIsLocallyCurrent) return false;
+
+      final ancestorNavigator = currentAncestor.navigator;
+      currentAncestor = ancestorNavigator != null
+          ? ModalRoute.of(ancestorNavigator.context)
+          : null;
     }
 
     // 3. Deeper check: Is there a focused navigator INSIDE us that can pop?
     // If so, that nested navigator's top route is the one that's truly current.
     final focus = FocusManager.instance.primaryFocus;
     final activeNavigator =
-        focus?.context != null ? Navigator.maybeOf(focus!.context!) : null;
+    focus?.context != null ? Navigator.maybeOf(focus!.context!) : null;
     if (activeNavigator != null &&
         activeNavigator != navigator &&
         activeNavigator.canPop()) {
