@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'app_dialog.dart';
 import 'app_page.dart';
 
 void main() {
@@ -21,7 +22,10 @@ class _MyAppState extends State<MyApp> {
       home: Navigator(
         pages: [
           MaterialPage(
-            // AppPage(
+          // AppDialog(
+          // AppDialogPage(
+          // AppBottomSheet(
+          // AppPage(
             name: 'RootScreen',
             child: RootScreen(
               onOpenNested: () => setState(() => _showNestedNavigator = true),
@@ -29,7 +33,10 @@ class _MyAppState extends State<MyApp> {
           ),
           if (_showNestedNavigator)
             MaterialPage(
-              // AppPage(
+            // AppDialog(
+            // AppDialogPage(
+            // AppBottomSheet(
+            // AppPage(
               name: 'NestedNavigatorWrapper',
               child: NestedNavigatorWrapper(
                 onOpenTopPage: () => setState(() => _showTopPage = true),
@@ -37,7 +44,10 @@ class _MyAppState extends State<MyApp> {
             ),
           if (_showTopPage)
             MaterialPage(
-              // AppPage(
+            // AppDialog(
+            // AppDialogPage(
+            // AppBottomSheet(
+            // AppPage(
               name: 'TopPage',
               child: TopPage(
                 onClose: () => setState(() => _showTopPage = false),
@@ -87,6 +97,9 @@ class _NestedNavigatorWrapperState extends State<NestedNavigatorWrapper> {
   Widget build(BuildContext context) {
     final pages = [
       MaterialPage(
+      // AppDialog(
+      // AppDialogPage(
+      // AppBottomSheet(
       // AppPage(
         name: 'NestedPage1',
         child: NestedPage1(
@@ -95,6 +108,9 @@ class _NestedNavigatorWrapperState extends State<NestedNavigatorWrapper> {
       ),
       if (_showPage2)
         MaterialPage(
+        // AppDialog(
+        // AppDialogPage(
+        // AppBottomSheet(
         // AppPage(
           name: 'NestedPage2',
           child: NestedPage2(onOpenTopPage: widget.onOpenTopPage),

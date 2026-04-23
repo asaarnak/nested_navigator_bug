@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'app_route_mixin.dart';
+
 class AppPage<T> extends MaterialPage<T> {
   const AppPage({required String super.name, required super.child});
 
@@ -10,7 +12,7 @@ class AppPage<T> extends MaterialPage<T> {
 }
 
 class _AppPageRoute<T> extends PageRoute<T>
-    with MaterialRouteTransitionMixin<T> {
+    with MaterialRouteTransitionMixin<T>, AppRouteMixin<T> {
   _AppPageRoute({required MaterialPage<T> page}) : super(settings: page);
 
   @override
@@ -26,31 +28,4 @@ class _AppPageRoute<T> extends PageRoute<T>
 
   @override
   String get debugLabel => '${super.debugLabel}(${settings.name})';
-
-  @override
-  bool get isCurrent {
-    if (!super.isCurrent) {
-      return false;
-    }
-
-    var isTrulyCurrent = true;
-    ModalRoute? parentRoute = ModalRoute.of(navigator!.context);
-
-    while (parentRoute != null) {
-      if (!parentRoute.isCurrent) {
-        isTrulyCurrent = false;
-        break;
-      }
-      final parentNav = parentRoute.navigator;
-      if (parentNav == null) {
-        break;
-      }
-      parentRoute = ModalRoute.of(parentNav.context);
-    }
-
-    if (!isTrulyCurrent) {
-      return false;
-    }
-    return true;
-  }
 }
